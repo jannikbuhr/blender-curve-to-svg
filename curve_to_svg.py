@@ -167,6 +167,27 @@ class DATA_OT_CurveExportSVG(bpy.types.Operator):
 
         box = [round(x * scale, precision) for x in box]
         svg.set('viewBox', ' '.join(str(x) for x in (box[0], -box[3], box[2] - box[0], box[3] - box[1])))
+        
+                my_width = box[2] - box[0]
+        my_height = box[3] - box[1]
+        
+        unit = bpy.data.scenes["Scene"].unit_settings.length_unit
+        
+        if unit == "METERS":
+            unit = "m"
+        elif unit == "KILOMETERS":
+            unit = "km"
+        elif unit == "CENTIMETERS":
+            unit = "cm"
+        elif unit == "MILLIMETERS":
+            unit = "mm"
+        elif unit == "MICROMETERS":
+            unit = "µm"
+        else:
+            unit =  ""
+        
+        svg.set('width', str(my_width) + unit)
+        svg.set('height', str(my_height) + unit)
 
         if scene.export_svg_minify:
             result = "<?xml version=\"1.0\" ?>" + ElementTree.tostring(svg, 'unicode')

@@ -168,7 +168,7 @@ class DATA_OT_CurveExportSVG(bpy.types.Operator):
         box = [round(x * scale, precision) for x in box]
         svg.set('viewBox', ' '.join(str(x) for x in (box[0], -box[3], box[2] - box[0], box[3] - box[1])))
         
-                my_width = box[2] - box[0]
+        my_width = box[2] - box[0]
         my_height = box[3] - box[1]
         
         unit = bpy.data.scenes["Scene"].unit_settings.length_unit
